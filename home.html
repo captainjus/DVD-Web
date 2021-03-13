@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <style>button.link{
+          background: none;
+          border: none;
+          padding: 0;
+          color: #069;
+          text-decoration: underline;
+          cursor: pointer;
+        }</style>
+
+
+        <title>DVD Library</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <!-- Additional CSS files here -->
+    </head>
+
+    <!-- Bootstraps and Scripts -->
+    <body>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!-- use the full jQuery build, NOT the slim build -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+        <!-- custom js files -->
+        <script src="js/home.js"></script>
+    </body>
+
+    <br>
+
+    <body>
+        <!-- Table View -->
+        <div id="tableView">
+            <!-- Header Banner w/ Buttons and Search -->
+            <form id="findForm" class="form row container offset-md-1">
+                <div id="createDVDdiv" class="form-group offset-md-2 col-md-5">
+                    <button id="create_btn" class="btn btn-primary">Create DVD</button>
+                </div>
+                <div id="searchDVDdiv" class="form-group col-md-3">
+                    <button id="search_btn" class="btn btn-primary">Search</button>
+                    <select name="select" id="select" class="" required>
+                        <option value="category" disabled selected>Search Category</option>
+                        <option id="title" value="title">Title</option>
+                        <option id="year" value="releaseYear">Release Year</option>
+                        <option id="director" value="director">Director Name</option>
+                        <option id="rating" value="rating">Rating</option>
+                    </select>
+                </div>
+                <input type="text"
+                       class="form-control col-md-2"
+                       id="searchTerm"
+                       placeholder="Search Term"
+                       required>
+            </form>
+            <!-- Error Message Popout Pane -->
+            <ul class="list-group" id="errorMessages"></ul>
+            <!-- DVD Table -->
+            <div class="container">
+                <table id="dvdTable" class="table">
+                    <thead>
+                        <tr>
+                            <th width="25%">Title</th>
+                            <th width="25%">Release Date</th>
+                            <th width="15%">Director</th>
+                            <th width="10%">Rating</th>
+                            <th width="25%"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="contentRows"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add DVD View -->
+        <div id="addView">
+            <h1 class="offset-md-3 col-md-10">Add a DVD: </h1>
+            <hr>
+            <form class="form horizontal offset-md-3 col-md-10" role="form" id="addForm">
+
+                <div class="form-group row">
+                    <!-- Title -->
+                    <label for="addTitle" class="control-label col-md-2" style="font-size:24px">
+                        DVD Title:
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text"
+                               class="form-control"
+                               style="font-size:16px"
+                               id="addTitle"
+                               placeholder="DVD Title"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Release Year -->
+                    <label for="addReleaseYear" class="control-label col-md-2" style="font-size:24px">
+                        Release Year:
+                    </label>
+                    <div class="col-md-4">
+                        <input type="number"
+                               max="9999"
+                               min="1000"
+                               class="form-control"
+                               style="font-size:16px"
+                               id="addReleaseYear"
+                               placeholder="Release Year"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Director -->
+                    <label for="addDirector" class="control-label col-md-2" style="font-size:24px">
+                        Director:
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text"
+                               class="form-control"
+                               style="font-size:16px"
+                               id="addDirector"
+                               placeholder="Director"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Rating -->
+                    <label for="addRating" class="control-label col-md-2" style="font-size:24px">
+                        Rating:
+                    </label>
+                    <div class="col-md-4">
+                        <select name="select" id="addRating" style="font-size:20px" required>
+                            <option value="rating" disabled selected>Choose Rating</option>
+                            <option value="pg">PG</option>
+                            <option value="pg13">PG-13</option>
+                            <option value="g">G</option>
+                            <option value="r">R</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Notes -->
+                    <label for="addNotes" class="control-label col-md-2" style="font-size:24px">
+                        Notes:
+                    </label>
+                    <div class="col-md-4">
+                        <textarea  form="addForm" id="addNotes" style="font-size:16px" cols="50" placeholder="Notes"></textarea>
+                    </div>
+                </div>
+
+                <button id="add_cancel">Cancel</button> <button id="add_btn" class="form-group">Create DVD</button>
+            </form>
+        </div>
+
+        <!-- Edit DVD View -->
+        <div id="editView">
+            <h1 class="offset-md-3 col-md-10">Edit a DVD: </h1>
+            <hr>
+            <form class="form horizontal offset-md-3 col-md-10" role="form" id="editForm">
+
+                <div class="form-group row">
+                    <!-- Title -->
+                    <label for="editTitle" class="control-label col-md-2" style="font-size:24px">
+                        DVD Title:
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text"
+                               class="form-control"
+                               style="font-size:16px"
+                               id="editTitle"
+                               placeholder="DVD Title"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Release Year -->
+                    <label for="editReleaseYear" class="control-label col-md-2" style="font-size:24px">
+                        Release Year:
+                    </label>
+                    <div class="col-md-4">
+                        <input type="number"
+                               max="9999"
+                               min="1000"
+                               class="form-control"
+                               style="font-size:16px"
+                               id="editReleaseYear"
+                               placeholder="Release Year"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Director -->
+                    <label for="editDirector" class="control-label col-md-2" style="font-size:24px">
+                        Director:
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text"
+                               class="form-control"
+                               style="font-size:16px"
+                               id="editDirector"
+                               placeholder="Director"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Rating -->
+                    <label for="editRating" class="control-label col-md-2" style="font-size:24px">
+                        Rating:
+                    </label>
+                    <div class="col-md-4">
+                        <select name="select" id="editRating" style="font-size:20px" required>
+                            <option value="rating" disabled selected>Choose Rating</option>
+                            <option value="pg">PG</option>
+                            <option value="pg13">PG-13</option>
+                            <option value="g">G</option>
+                            <option value="r">R</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <!-- Notes -->
+                    <label for="editNotes" class="control-label col-md-2" style="font-size:24px">
+                        Notes:
+                    </label>
+                    <div class="col-md-4">
+                        <textarea  form="editForm" id="editNotes" style="font-size:16px" cols="50" placeholder="Notes"></textarea>
+                    </div>
+                </div>
+
+                <button id="edit_cancel">Cancel</button> <button id="edit_btn" class="form-group">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- DVD View -->
+        <div id="dvdView">
+        <h1 class="offset-md-3 col-md-10">DVD Title:</h1>
+        <hr>
+            <div class="horizontal offset-md-3 col-md-10">
+
+                <div class="row">
+                    <!-- Release Year -->
+                    <label class="control-label col-md-2" style="font-size:24px">
+                        Release Year:
+                    </label>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Director -->
+                    <label class="control-label col-md-2" style="font-size:24px">
+                        Director:
+                    </label>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Rating -->
+                    <label class="control-label col-md-2" style="font-size:24px">
+                        Rating:
+                    </label>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Notes -->
+                    <label class="control-label col-md-2" style="font-size:24px">
+                        Notes:
+                    </label>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+
+                <button id="dvd_cancel">Back</button>
+            </div>
+        </div>
+    </body>
+
+</html>
